@@ -49,6 +49,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+		
         $user_id = Sentinel::getUser()->id;
 		
 		$results = $this->validate($request,
@@ -65,10 +66,8 @@ class PostController extends Controller
 		
 		$post = new Post();
 		
-		try{
-			
-			$post->savePost($data);
-			
+		try{		
+			$s = $post->savePost($data);
 		} catch(Exception $e){
 			
 			session()->flash('danger', $e->getMessage());
