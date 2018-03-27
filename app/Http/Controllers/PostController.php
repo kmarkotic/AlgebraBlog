@@ -9,6 +9,12 @@ use Exception;
 
 class PostController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('sentinel.auth');
+	}
+	
+	
     /**
      * Display a listing of the resource.
      *

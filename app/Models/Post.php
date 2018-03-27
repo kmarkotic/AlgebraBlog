@@ -64,4 +64,12 @@ class Post extends Model
             ]
         ];
     }
+	
+	/**
+     * Get the user posts.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
