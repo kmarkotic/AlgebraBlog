@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/','HomeController@index')->name('home');
-Route::get('/post/{slug}','HomeController@show')->name('post.show');  
-
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/post/{slug}', 'HomeController@show')->name('post.show');
 
 // Authorization
 Route::get('login', 'Auth\SessionController@getLogin')->name('auth.login.form');

@@ -14,11 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at','DESC')->paginate(12);
-		return view('home',[
-			'posts' =>$posts
-		]);
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
 		
+		return view('home',[
+			'posts' => $posts
+		]);
     }
 
     /**
@@ -50,15 +50,16 @@ class HomeController extends Controller
      */
     public function show($slug)
     {
-        $post= Post::where('slug',$slug)->get()->first();
 		
-			if(!$post)
-				abort(404);
-			
-			return view('show-post',[
-				'post'=>$post
-				]);
-		}
+        $post = Post::where('slug',$slug)->get()->first();
+		
+		if(!$post)
+			abort(404);
+		
+		return view('show-post',[
+			'post' => $post
+		]);
+    }
 
     /**
      * Show the form for editing the specified resource.

@@ -13,8 +13,6 @@ class PostController extends Controller
 	{
 		$this->middleware('sentinel.auth');
 	}
-	
-	
     /**
      * Display a listing of the resource.
      *
@@ -55,7 +53,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-		
         $user_id = Sentinel::getUser()->id;
 		
 		$results = $this->validate($request,
@@ -72,8 +69,10 @@ class PostController extends Controller
 		
 		$post = new Post();
 		
-		try{		
-			$s = $post->savePost($data);
+		try{
+			
+			$post->savePost($data);
+			
 		} catch(Exception $e){
 			
 			session()->flash('danger', $e->getMessage());

@@ -5,28 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
- 
 class Post extends Model
 {
 	use Sluggable;
-	 
+	
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-
-			'title',
-			'content',
-			'user_id'];
-
-				/**
-				*Update Post.
-				*
-				*@param array $post
-				*@return void
-				*ako metoda nista ne vrati stavimo void
-				*/
-	public function updatePost($post)
-	{
-		$this->update($post);
-	}
+					'title',
+					'content',
+					'user_id'];
 					
 	 /**
      * Save new Post.
@@ -47,15 +38,16 @@ class Post extends Model
 	 * @return void
      */
 	 
-
+	public function updatePost($post)
+	{
+		$this->update($post);
+	}
 
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-
-
     public function sluggable()
     {
         return [
@@ -65,11 +57,16 @@ class Post extends Model
         ];
     }
 	
-	/**
-     * Get the user posts.
+	 /**
+     * Get the post user.
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
 }
+
+
+
+
+
