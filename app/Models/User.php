@@ -13,4 +13,13 @@ class User extends EloquentUser
     {
         return $this->hasMany('App\Models\Post');
     }
+	
+	/**
+     * Get the post comments.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+	
 }
