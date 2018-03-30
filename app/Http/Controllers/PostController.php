@@ -75,7 +75,7 @@ class PostController extends Controller
 			
 		} catch(Exception $e){
 			
-			session()->flash('danger', $e->getMessage());
+			session()->flash('error', $e->getMessage());
 			return redirect()->back();
 		}
 		
@@ -104,11 +104,16 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+		$user_id=Sentinel::getUser()->id;
 		
+		if(Sentinel::inRole('administrator') or $user_id===$post->user_id){
 		return view('centaur.posts.edit',
 		[
 			'post' => $post
-		]);
+			]);
+		}
+		session()->flash('error','You don\'t have permission to do that!!!!');
+		return redirect()->back();
     }
 
     /**
@@ -139,7 +144,7 @@ class PostController extends Controller
 			
 		} catch(Exception $e){
 			
-			session()->flash('danger', $e->getMessage());
+			session()->flash('error', $e->getMessage());
 			return redirect()->back();
 		}
 		

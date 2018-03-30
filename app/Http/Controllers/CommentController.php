@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Comment;
+use Sentinel;
+use Exception;
 
-class HomeController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->paginate(12);
-
-		return view('home',[
-			'posts' => $posts
-		]);
+        //
     }
 
     /**
@@ -39,26 +37,38 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result=$this->validate($request,[
+						'comment'=> 'required'
+					]);
+		$user_id=Sentinel::getUser()->id;
+
+$data =array(
+			'content'=>$request->get('comment'),
+			'post_id'=>$request->get('post_id'),
+			'user_id'=>$user_id,
+			'status'=> 2
+			);
+			
+			$comment=new Comment();
+			try{
+				$comment ->saveComment($data);
+			}catch(Exception $e){
+				session()->flash('error',$e->getMessage());
+				return redirect()->back();
+			}
+			session()->flash('success','Uspješno ste dodali novi komentar');
+			return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  string  $slug
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-
-        $post = Post::where('slug',$slug)->get()->first();
-
-		if(!$post)
-			abort(404);
-
-		return view('show-post',[
-			'post' => $post
-		]);
+        //
     }
 
     /**
