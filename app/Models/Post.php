@@ -72,6 +72,14 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Comment')->where('status', 1);
     }
+	
+	 /**
+     * Get the post comments.
+     */
+    public function pendingComments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }
 
 
