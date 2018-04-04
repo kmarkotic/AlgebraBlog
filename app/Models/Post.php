@@ -65,6 +65,7 @@ class Post extends Model
         return $this->belongsTo('App\Models\User');
     }
 	
+<<<<<<< HEAD
 	/**
      * Get the user comments.
      */
@@ -73,6 +74,23 @@ class Post extends Model
         return $this->hasMany('App\Models\Comment')->where('status',1);
     }
 	
+=======
+	 /**
+     * Get the post comments.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment')->where('status', 1);
+    }
+	
+	 /**
+     * Get the post comments.
+     */
+    public function pendingComments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+>>>>>>> 05c82859e20c4184de9d50b4ad0cb93423e4a928
 }
 
 

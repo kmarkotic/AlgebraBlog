@@ -104,6 +104,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+<<<<<<< HEAD
 		$user_id=Sentinel::getUser()->id;
 		
 		if(Sentinel::inRole('administrator') or $user_id===$post->user_id){
@@ -114,6 +115,20 @@ class PostController extends Controller
 		}
 		session()->flash('error','You don\'t have permission to do that!!!!');
 		return redirect()->back();
+=======
+		$user_id = Sentinel::getUser()->id;
+		
+		if(Sentinel::inRole('administrator') or $user_id === $post->user_id ){
+			return view('centaur.posts.edit',
+						[
+							'post' => $post
+						]);
+		}
+		
+		session()->flash('error', 'You don\'t have permission to do that!!!!!');
+		return redirect()->back();
+		
+>>>>>>> 05c82859e20c4184de9d50b4ad0cb93423e4a928
     }
 
     /**

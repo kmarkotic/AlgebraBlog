@@ -37,7 +37,11 @@
 						@if(Sentinel::check())
 							
 							<li class="{{ Request::is('posts*') ? 'active' : '' }}"><a href="{{ route('posts.index') }}">Posts</a></li>
+<<<<<<< HEAD
 
+=======
+							<li>{{ PendingComment::countComments() }}</li>
+>>>>>>> 05c82859e20c4184de9d50b4ad0cb93423e4a928
 						@endif
                         @if (Sentinel::check() && Sentinel::inRole('administrator'))
                             <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
